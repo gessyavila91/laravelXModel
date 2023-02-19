@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
+use SocialiteProviders\Manager\ServiceProvider;
 
 return [
 
@@ -199,6 +200,7 @@ return [
          * Application Dev Service Providers...
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        ServiceProvider::class,
 
     ],
 
