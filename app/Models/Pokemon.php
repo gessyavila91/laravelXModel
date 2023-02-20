@@ -10,34 +10,31 @@ class Pokemon extends Model
 {
     use HasFactory;
 
-    // Especificar la tabla
     protected $table = 'pokemons';
 
-    protected int $number;
+    protected $ev = 252;
 
-    protected string $name;
+    protected $level = 100;
 
-    protected string $type_1;
+    protected $iv = 31;
 
-    protected string $type_2;
-
-    //pokemon stats as protected variables
-    protected int $hp;
-
-    protected int $attack;
-
-    protected int $defense;
-
-    protected int $spAttack;
-
-    protected int $spDefense;
-
-    protected int $speed;
+    protected $nature = 1.1;
 
     //methods
-    public function totalStats(): int
+
+    public function getTotalStatsAttribute(): int
     {
-        return 0;
+        return $this->hp + $this->attack + $this->defense + $this->spAttack + $this->spDefense + $this->speed;
+    }
+
+    public function getMaxStat($baseStat): int
+    {
+        return floor(floor((2 * $baseStat + $this->iv + floor($this->ev / 4)) * $this->level / 100) + 5) * $this->nature;
+    }
+
+    public function getMaxHPStat($baseStat): int
+    {
+        return floor(0.01 * (2 * $baseStat + $this->iv + floor(0.25 * $this->ev)) * $this->level) + $this->level + 10;
     }
 
     protected $casts = [

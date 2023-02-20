@@ -269,7 +269,7 @@
             <td>{{ $pokemon->spAttack }}</td>
             <td>{{ $pokemon->spDefense }}</td>
             <td>{{ $pokemon->speed }}</td>
-            <td>{{ $pokemon->totalStats() }}</td>
+            <td>{{ $pokemon->totalStats }}</td>
             <td>
                 <a class="action-btn edit">Editar</a>
                 <form method="POST" class="d-inline">
