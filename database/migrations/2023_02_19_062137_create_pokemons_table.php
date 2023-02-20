@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
 
             $table->integer('number');
-            $table->string('name');
-            $table->string('type');
+            $table->string('name')->unique();
+            $table->string('type_1');
+            $table->string('type_2');
             //pokemon stats as protected variables
             $table->integer('hp');
             $table->integer('attack');

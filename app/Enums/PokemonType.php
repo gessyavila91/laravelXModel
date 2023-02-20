@@ -2,6 +2,8 @@
 
 namespace App\Enums;
 
+use BenSampo\Enum\Enum;
+
 final class PokemonType extends Enum
 {
     const NORMAL = 'NORMAL';

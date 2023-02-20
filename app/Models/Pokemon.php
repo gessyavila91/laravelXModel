@@ -13,29 +13,36 @@ class Pokemon extends Model
     // Especificar la tabla
     protected $table = 'pokemons';
 
-    protected $number;
+    protected int $number;
 
-    protected $name;
+    protected string $name;
 
-    protected $type;
+    protected string $type_1;
+
+    protected string $type_2;
 
     //pokemon stats as protected variables
-    protected $hp;
+    protected int $hp;
 
-    protected $attack;
+    protected int $attack;
 
-    protected $defense;
+    protected int $defense;
 
-    protected $spAttack;
+    protected int $spAttack;
 
-    protected $spDefense;
+    protected int $spDefense;
 
-    protected $speed;
+    protected int $speed;
 
     //methods
-    public function getTotalStats()
+    public function totalStats()
     {
-        return $this->hp + $this->attack + $this->defense + $this->spAttack + $this->spDefense + $this->speed;
+        return $this->hp +
+            $this->attack +
+            $this->defense +
+            $this->spAttack +
+            $this->spDefense +
+            $this->speed;
     }
 
     protected $casts = [
