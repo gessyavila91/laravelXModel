@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\PokemonType;
 use App\Models\Pokemon;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
@@ -39,27 +40,15 @@ class PokemonController extends Controller
 
     // Actions
 
-    /**
-     * @return Application|RedirectResponse|Redirector
-     */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $validator = $this->fnValidator($request);
 
-        if ($validator->fails()) {
-            return redirect()
-                ->back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
         $pokemon = new Pokemon();
         $this->setPokemonValues($request, $pokemon);
-        $pokemon->speed = $request->input('speed');
-
         $pokemon->save();
-
-        return redirect('/pokedex')->with('success', 'Pokemon creado exitosamente!');
+        //respuesta de api con estatus 201
+        return response()->json($pokemon, 201);
     }
 
     /**
@@ -102,7 +91,7 @@ class PokemonController extends Controller
             'number' => 'required|integer',
             'name' => 'required|min|max:255',
             'type_1' => ['required', 'string', 'enum_value:'.PokemonType::class],
-            'type_2' => ['required', 'string', 'enum_value:'.PokemonType::class],
+            'type_2' => ['nullable', 'string', 'enum_value:'.PokemonType::class],
             //pokemon stats rules
             'hp' => 'required|integer|min:0|max:255',
             'attack' => 'required|integer|min:0|max:255',
@@ -120,7 +109,7 @@ class PokemonController extends Controller
 
             'type_1.required' => 'El tipo de Pokémon es obligatorio',
             'type_1.enum_value' => 'El tipo de Pokémon debe ser '.implode(',', PokemonType::getValues()),
-            'type_2.required' => 'El tipo de Pokémon es obligatorio',
+
             'type_2.enum_value' => 'El tipo secundario de Pokémon debe ser '.implode(',', PokemonType::getValues()),
 
             'hp.required' => 'La vida del Pokémon es obligatoria',
@@ -169,5 +158,6 @@ class PokemonController extends Controller
         $pokemon->defense = $request->input('defense');
         $pokemon->spAttack = $request->input('spAttack');
         $pokemon->spDefense = $request->input('spDefense');
+        $pokemon->speed = $request->input('speed');
     }
 }

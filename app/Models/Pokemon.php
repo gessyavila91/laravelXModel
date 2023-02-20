@@ -35,14 +35,9 @@ class Pokemon extends Model
     protected int $speed;
 
     //methods
-    public function totalStats()
+    public function totalStats(): int
     {
-        return $this->hp +
-            $this->attack +
-            $this->defense +
-            $this->spAttack +
-            $this->spDefense +
-            $this->speed;
+        return 0;
     }
 
     protected $casts = [
