@@ -19,8 +19,8 @@ class PokemonFactory extends Factory
     public function definition(): array
     {
         return [
-            'number' => fake()->numberBetween(1, 151),
-            'name' => strtoupper(ucwords(implode('', fake()->words(rand(1, 2))))),
+            'number' => fake()->unique()->numberBetween(1, 151),
+            'name' => strtoupper(ucwords(implode('', fake()->words(rand(1, 3))))),
             'type_1' => PokemonType::getRandomValue(),
             //type_2 can be null and get PokemonType::getRandomValue()
             'type_2' => fake()->boolean(50) ? null : PokemonType::getRandomValue(),
