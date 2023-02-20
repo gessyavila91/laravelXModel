@@ -42,13 +42,20 @@ class PokemonController extends Controller
 
     public function store(Request $request): JsonResponse
     {
+        $response = null;
         $validator = $this->fnValidator($request);
 
-        $pokemon = new Pokemon();
-        $this->setPokemonValues($request, $pokemon);
-        $pokemon->save();
-        //respuesta de api con estatus 201
-        return response()->json($pokemon, 201);
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            $response = response()->json($errors, 400);
+        } else {
+            $pokemon = new Pokemon();
+            $this->setPokemonValues($request, $pokemon);
+            $pokemon->save();
+            $response = response()->json($pokemon, 201);
+        }
+
+        return $response;
     }
 
     /**
@@ -89,7 +96,7 @@ class PokemonController extends Controller
     {
         $rules = [
             'number' => 'required|integer',
-            'name' => 'required|min|max:255',
+            'name' => 'required|string|min:3|max:255',
             'type_1' => ['required', 'string', 'enum_value:'.PokemonType::class],
             'type_2' => ['nullable', 'string', 'enum_value:'.PokemonType::class],
             //pokemon stats rules
