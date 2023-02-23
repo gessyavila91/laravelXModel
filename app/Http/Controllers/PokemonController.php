@@ -167,4 +167,46 @@ class PokemonController extends Controller
         $pokemon->spDefense = $request->input('spDefense');
         $pokemon->speed = $request->input('speed');
     }
+
+    public function getPokemonByNumberFromJson($number, $option = []): array
+    {
+        $pokemon = null;
+        if ($number < 1 || $number > 151) {
+            //return empty array
+            $pokemon = [];
+        } else {
+            if ($option == []) {
+                //find pokemon in json file
+                $pokemonJson = file_get_contents(resource_path('pokemonJson/pokemonGen01.json'));
+                $array = json_decode($pokemonJson, JSON_FORCE_OBJECT);
+                $index = array_search($number, array_column($array, 'number'));
+
+                $pokemon = $array[$index];
+            } else {
+                //find pokemon in json file
+                $pokemonJson = file_get_contents(resource_path('pokemonJson/pokemonGen01.json'));
+                $array = json_decode($pokemonJson, JSON_FORCE_OBJECT);
+                $array2 = [
+                    'number' => '6',
+                    'form' => ['mega' => 'X'],
+                    'name' => 'Charizard X',
+                    'type_1' => 'FIRE',
+                    'type_2' => 'DRAGON',
+                    'total' => '634',
+                    'hp' => '78',
+                    'attack' => '130',
+                    'defense' => '111',
+                    'spAttack' => '130',
+                    'spDefense' => '85',
+                    'speed' => '100',
+                ];
+                //search in array2 if got form and is a x form
+                if (array_key_exists('form', $array2) && $array2['form'] == null) {
+                    $pokemon = $array2;
+                }
+            }
+        }
+
+        return $pokemon;
+    }
 }
