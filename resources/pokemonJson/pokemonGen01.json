@@ -151,19 +151,6 @@
     },
     {
         "number": "9",
-        "name": "Blastoise",
-        "type_1": "WATER",
-        "type_2": null,
-        "total": "530",
-        "hp": "79",
-        "attack": "83",
-        "defense": "100",
-        "spAttack": "85",
-        "spDefense": "105",
-        "speed": "78"
-    },
-    {
-        "number": "9",
         "form": "mega",
         "name": "Blastoise",
         "type_1": "WATER",
@@ -174,6 +161,19 @@
         "defense": "120",
         "spAttack": "135",
         "spDefense": "115",
+        "speed": "78"
+    },
+    {
+        "number": "9",
+        "name": "Blastoise",
+        "type_1": "WATER",
+        "type_2": null,
+        "total": "530",
+        "hp": "79",
+        "attack": "83",
+        "defense": "100",
+        "spAttack": "85",
+        "spDefense": "105",
         "speed": "78"
     },
     {

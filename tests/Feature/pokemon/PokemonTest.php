@@ -193,13 +193,17 @@ it('get no mega Charizard from Json getPokemonByNumberFromJson()', function () {
         'speed' => '100',
     ], $json);
 });
-
-it('get mega CharizardX from Json getPokemonByNumberFromJson()', function () {
-    $option = ['mega' => 'X'];
+//it can get Mega Charizard X with number and option 'form' => 'mega' => 'x'
+it('can get Mega Charizard X with number and option', function () {
+    //assert with response message
     $pokemonC = new PokemonController();
-    $json = $pokemonC->getPokemonByNumberFromJson(6, $option);
+    $json = $pokemonC->getPokemonByNumberFromJson(6, ['mega' => 'X']);
 
     $this->assertEquals([
+        'number' => '6',
+        'form' => [
+            'mega' => 'X',
+        ],
         'name' => 'Charizard X',
         'type_1' => 'FIRE',
         'type_2' => 'DRAGON',
@@ -212,14 +216,18 @@ it('get mega CharizardX from Json getPokemonByNumberFromJson()', function () {
         'speed' => '100',
     ], $json);
 });
-it('get mega CharizardY from Json getPokemonByNumberFromJson()', function () {
+
+//it can get Mega Charizard Y with number and option 'form' => 'mega' => 'Y'
+it('can get Mega Charizard Y with number and option', function () {
     //assert with response message
-    $option = ['mega' => 'Y'];
     $pokemonC = new PokemonController();
-    $json = $pokemonC->getPokemonByNumberFromJson(6, $option);
+    $json = $pokemonC->getPokemonByNumberFromJson(6, ['mega' => 'Y']);
 
     $this->assertEquals([
         'number' => '6',
+        'form' => [
+            'mega' => 'Y',
+        ],
         'name' => 'Charizard Y',
         'type_1' => 'FIRE',
         'type_2' => 'FLYING',
@@ -230,6 +238,55 @@ it('get mega CharizardY from Json getPokemonByNumberFromJson()', function () {
         'spAttack' => '159',
         'spDefense' => '115',
         'speed' => '100',
+    ], $json);
+});
+//it can get Mega Charizard Y with number and option 'form' => 'mega' => 'Y'
+it('can`t find Mega Charizard Y with number and option with not  "Y"', function () {
+    //assert with response message
+    $pokemonC = new PokemonController();
+    $json = $pokemonC->getPokemonByNumberFromJson(6, ['mega']);
+
+    $this->assertEmpty($json);
+});
+
+//it can get Mega Blastoise only with number
+it('can get Blastoise only with number', function () {
+    //assert with response message
+    $pokemonC = new PokemonController();
+    $json = $pokemonC->getPokemonByNumberFromJson(9);
+
+    $this->assertEquals([
+        'number' => '9',
+        'name' => 'Blastoise',
+        'type_1' => 'WATER',
+        'type_2' => null,
+        'total' => '530',
+        'hp' => '79',
+        'attack' => '83',
+        'defense' => '100',
+        'spAttack' => '85',
+        'spDefense' => '105',
+        'speed' => '78',
+    ], $json);
+});
+it('can Mega get Blastoise only with number and OPT', function () {
+    //assert with response message
+    $pokemonC = new PokemonController();
+    $json = $pokemonC->getPokemonByNumberFromJson(9, ['mega']);
+
+    $this->assertEquals([
+        'number' => '9',
+        'name' => 'Blastoise',
+        'form' => 'mega',
+        'type_1' => 'WATER',
+        'type_2' => null,
+        'total' => '630',
+        'hp' => '79',
+        'attack' => '103',
+        'defense' => '120',
+        'spAttack' => '135',
+        'spDefense' => '115',
+        'speed' => '78',
     ], $json);
 });
 
