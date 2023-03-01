@@ -177,35 +177,22 @@ class PokemonController extends Controller
         $file = file_get_contents(resource_path('pokemonJson/pokemonGen01.json'));
         $pokemonJson = json_decode($file, true, 512, JSON_THROW_ON_ERROR);
 
-        if ($number < 1 || $number > 151) {
-            $pokemon = [];
-        } else {
-            if ($option == []) {
-                //find in $PokemonJson pokemon without 'form' key
-                $pokemon = array_values((array) array_filter($pokemonJson, function ($pokemon) use ($number) {
-                    return $pokemon['number'] == $number && ! array_key_exists('form', $pokemon);
-                }));
-            //$pokemon = $pokemons
+        $pokemon = array_values((array) array_filter($pokemonJson, function ($pokemon) use ($number, $option) {
+            if ($option == null) {
+                $result = $pokemon['number'] == $number && ! array_key_exists('form', $pokemon);
+            } elseif ($option == ['mega' => 'Y'] || $option == ['mega' => 'X']) {
+                $result =
+                    $pokemon['number'] == $number &&
+                    array_key_exists('form', $pokemon) &&
+                    $pokemon['form']['mega'] == $option['mega'];
             } else {
-                //find pokemon in json file with options
-                // if $option contains Mega form
-
-                $pokemon = array_values((array) array_filter($pokemonJson, function ($pokemon) use ($number, $option) {
-                    if ($option == ['mega' => 'Y'] || $option == ['mega' => 'X']) {
-                        $result =
-                            $pokemon['number'] == $number &&
-                            array_key_exists('form', $pokemon) &&
-                            $pokemon['form']['mega'] == $option['mega'];
-                    } else {
-                        $result = $pokemon['number'] == $number &&
-                            array_key_exists('form', $pokemon) &&
-                            $pokemon['form'] == 'mega';
-                    }
-
-                    return $result;
-                }));
+                $result = $pokemon['number'] == $number &&
+                    array_key_exists('form', $pokemon) &&
+                    $pokemon['form'] == 'mega';
             }
-        }
+
+            return $result;
+        }));
 
         return $pokemon != [] ? reset($pokemon) : [];
     }
