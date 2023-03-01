@@ -190,30 +190,23 @@ class PokemonController extends Controller
                 //find pokemon in json file with options
                 // if $option contains Mega form
 
-                if (array_key_exists('mega', $option) || $option == ['mega']) {
+                $pokemon = array_values((array) array_filter($pokemonJson, function ($pokemon) use ($number, $option) {
                     if ($option == ['mega' => 'Y'] || $option == ['mega' => 'X']) {
-                        $pokemon = array_values((array) array_filter($pokemonJson, function ($pokemon) use ($number, $option) {
-                            $result =
-                                $pokemon['number'] == $number &&
-                                array_key_exists('form', $pokemon) &&
-                                $pokemon['form']['mega'] == $option['mega'];
-
-                            return $result;
-                        }));
+                        $result =
+                            $pokemon['number'] == $number &&
+                            array_key_exists('form', $pokemon) &&
+                            $pokemon['form']['mega'] == $option['mega'];
                     } else {
-                        $pokemon = array_values((array) array_filter($pokemonJson, function ($pokemon) use ($number) {
-                            $result = $pokemon['number'] == $number &&
-                                array_key_exists('form', $pokemon) &&
-                                $pokemon['form'] == 'mega';
-
-                            return $result;
-                        }));
+                        $result = $pokemon['number'] == $number &&
+                            array_key_exists('form', $pokemon) &&
+                            $pokemon['form'] == 'mega';
                     }
-                }
+
+                    return $result;
+                }));
             }
-            $pokemon = $pokemon != [] ? reset($pokemon) : [];
         }
 
-        return $pokemon;
+        return $pokemon != [] ? reset($pokemon) : [];
     }
 }
