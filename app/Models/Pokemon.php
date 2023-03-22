@@ -29,7 +29,11 @@ class Pokemon extends Model
 
     public function getMaxStat($baseStat): int
     {
-        return floor(floor((2 * $baseStat + $this->iv + floor($this->ev / 4)) * $this->level / 100) + 5) * $this->nature;
+        return floor(
+            floor((2 * $baseStat + $this->iv +
+                    floor($this->ev / 4)
+            ) * $this->level / 100) + 5
+        ) * $this->nature;
     }
 
     public function getMaxHPStat($baseStat): int

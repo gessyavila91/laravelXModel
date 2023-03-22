@@ -84,7 +84,10 @@ it('can`t create a new Pokemon with longName', function () {
     $pokemon = Pokemon::factory()->make();
     $response = $this->post('api/pokemon', [
         'number' => $pokemon->number,
-        'name' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+        'name' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur
+        adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur
+        adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur
+        adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit',
         'type_1' => $pokemon->type_1,
         'type_2' => $pokemon->type_2,
         'hp' => $pokemon->hp,

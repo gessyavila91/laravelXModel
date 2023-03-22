@@ -5,7 +5,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 10.1.3.
+ * Generated for Laravel 10.4.1.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1867,6 +1867,21 @@ namespace Illuminate\Support\Facades {
     class Artisan
     {
         /**
+         * Re-route the Symfony command events to their Laravel counterparts.
+         *
+         * @internal
+         *
+         * @return \App\Console\Kernel
+         *
+         * @static
+         */
+        public static function rerouteSymfonyCommandEvents()
+        {            //Method inherited from \Illuminate\Foundation\Console\Kernel
+            /** @var \App\Console\Kernel $instance */
+            return $instance->rerouteSymfonyCommandEvents();
+        }
+
+        /**
          * Run the console application.
          *
          * @param  \Symfony\Component\Console\Input\InputInterface  $input
@@ -3434,6 +3449,7 @@ namespace Illuminate\Support\Facades {
      * @method static array|null resolveAuthenticatedUser(\Illuminate\Http\Request $request)
      * @method static void resolveAuthenticatedUserUsing(\Closure $callback)
      * @method static \Illuminate\Broadcasting\Broadcasters\Broadcaster channel(\Illuminate\Contracts\Broadcasting\HasBroadcastChannel|string $channel, callable|string $callback, array $options = [])
+     * @method static \Illuminate\Support\Collection getChannels()
      *
      * @see \Illuminate\Broadcasting\BroadcastManager
      * @see \Illuminate\Broadcasting\Broadcasters\Broadcaster
@@ -4970,7 +4986,7 @@ namespace Illuminate\Support\Facades {
          */
         public static function lock($name, $seconds = 0, $owner = null)
         {
-            /** @var \Illuminate\Cache\RedisStore $instance */
+            /** @var \Illuminate\Cache\FileStore $instance */
             return $instance->lock($name, $seconds, $owner);
         }
 
@@ -4985,7 +5001,7 @@ namespace Illuminate\Support\Facades {
          */
         public static function restoreLock($name, $owner)
         {
-            /** @var \Illuminate\Cache\RedisStore $instance */
+            /** @var \Illuminate\Cache\FileStore $instance */
             return $instance->restoreLock($name, $owner);
         }
 
@@ -4998,88 +5014,34 @@ namespace Illuminate\Support\Facades {
          */
         public static function flush()
         {
-            /** @var \Illuminate\Cache\RedisStore $instance */
+            /** @var \Illuminate\Cache\FileStore $instance */
             return $instance->flush();
         }
 
         /**
-         * Remove all expired tag set entries.
+         * Get the Filesystem instance.
          *
-         * @return bool
+         * @return \Illuminate\Filesystem\Filesystem
          *
          * @static
          */
-        public static function flushStaleTags()
+        public static function getFilesystem()
         {
-            /** @var \Illuminate\Cache\RedisStore $instance */
-            return $instance->flushStaleTags();
+            /** @var \Illuminate\Cache\FileStore $instance */
+            return $instance->getFilesystem();
         }
 
         /**
-         * Get the Redis connection instance.
+         * Get the working directory of the cache.
          *
-         * @return \Illuminate\Redis\Connections\Connection
-         *
-         * @static
-         */
-        public static function connection()
-        {
-            /** @var \Illuminate\Cache\RedisStore $instance */
-            return $instance->connection();
-        }
-
-        /**
-         * Get the Redis connection instance that should be used to manage locks.
-         *
-         * @return \Illuminate\Redis\Connections\Connection
+         * @return string
          *
          * @static
          */
-        public static function lockConnection()
+        public static function getDirectory()
         {
-            /** @var \Illuminate\Cache\RedisStore $instance */
-            return $instance->lockConnection();
-        }
-
-        /**
-         * Specify the name of the connection that should be used to store data.
-         *
-         * @param  string  $connection
-         * @return void
-         *
-         * @static
-         */
-        public static function setConnection($connection)
-        {
-            /** @var \Illuminate\Cache\RedisStore $instance */
-            $instance->setConnection($connection);
-        }
-
-        /**
-         * Specify the name of the connection that should be used to manage locks.
-         *
-         * @param  string  $connection
-         * @return \Illuminate\Cache\RedisStore
-         *
-         * @static
-         */
-        public static function setLockConnection($connection)
-        {
-            /** @var \Illuminate\Cache\RedisStore $instance */
-            return $instance->setLockConnection($connection);
-        }
-
-        /**
-         * Get the Redis database instance.
-         *
-         * @return \Illuminate\Contracts\Redis\Factory
-         *
-         * @static
-         */
-        public static function getRedis()
-        {
-            /** @var \Illuminate\Cache\RedisStore $instance */
-            return $instance->getRedis();
+            /** @var \Illuminate\Cache\FileStore $instance */
+            return $instance->getDirectory();
         }
 
         /**
@@ -5091,22 +5053,8 @@ namespace Illuminate\Support\Facades {
          */
         public static function getPrefix()
         {
-            /** @var \Illuminate\Cache\RedisStore $instance */
+            /** @var \Illuminate\Cache\FileStore $instance */
             return $instance->getPrefix();
-        }
-
-        /**
-         * Set the cache key prefix.
-         *
-         * @param  string  $prefix
-         * @return void
-         *
-         * @static
-         */
-        public static function setPrefix($prefix)
-        {
-            /** @var \Illuminate\Cache\RedisStore $instance */
-            $instance->setPrefix($prefix);
         }
     }
     /**
@@ -5563,117 +5511,6 @@ namespace Illuminate\Support\Facades {
         public static function flushMacros()
         {
             \Illuminate\Cookie\CookieJar::flushMacros();
-        }
-    }
-    /**
-     * @see \Illuminate\Encryption\Encrypter
-     */
-    class Crypt
-    {
-        /**
-         * Determine if the given key and cipher combination is valid.
-         *
-         * @param  string  $key
-         * @param  string  $cipher
-         * @return bool
-         *
-         * @static
-         */
-        public static function supported($key, $cipher)
-        {
-            return \Illuminate\Encryption\Encrypter::supported($key, $cipher);
-        }
-
-        /**
-         * Create a new encryption key for the given cipher.
-         *
-         * @param  string  $cipher
-         * @return string
-         *
-         * @static
-         */
-        public static function generateKey($cipher)
-        {
-            return \Illuminate\Encryption\Encrypter::generateKey($cipher);
-        }
-
-        /**
-         * Encrypt the given value.
-         *
-         * @param  mixed  $value
-         * @param  bool  $serialize
-         * @return string
-         *
-         * @throws \Illuminate\Contracts\Encryption\EncryptException
-         *
-         * @static
-         */
-        public static function encrypt($value, $serialize = true)
-        {
-            /** @var \Illuminate\Encryption\Encrypter $instance */
-            return $instance->encrypt($value, $serialize);
-        }
-
-        /**
-         * Encrypt a string without serialization.
-         *
-         * @param  string  $value
-         * @return string
-         *
-         * @throws \Illuminate\Contracts\Encryption\EncryptException
-         *
-         * @static
-         */
-        public static function encryptString($value)
-        {
-            /** @var \Illuminate\Encryption\Encrypter $instance */
-            return $instance->encryptString($value);
-        }
-
-        /**
-         * Decrypt the given value.
-         *
-         * @param  string  $payload
-         * @param  bool  $unserialize
-         * @return mixed
-         *
-         * @throws \Illuminate\Contracts\Encryption\DecryptException
-         *
-         * @static
-         */
-        public static function decrypt($payload, $unserialize = true)
-        {
-            /** @var \Illuminate\Encryption\Encrypter $instance */
-            return $instance->decrypt($payload, $unserialize);
-        }
-
-        /**
-         * Decrypt the given string without unserialization.
-         *
-         * @param  string  $payload
-         * @return string
-         *
-         * @throws \Illuminate\Contracts\Encryption\DecryptException
-         *
-         * @static
-         */
-        public static function decryptString($payload)
-        {
-            /** @var \Illuminate\Encryption\Encrypter $instance */
-            return $instance->decryptString($payload);
-        }
-
-        /**
-         * Get the encryption key that the encrypter is currently using.
-         *
-         * @return string
-         *
-         * @static
-         */
-        public static function getKey()
-        {
-            /** @var \Illuminate\Encryption\Encrypter $instance */
-            return $instance->getKey();
         }
     }
     /**
@@ -7693,6 +7530,23 @@ namespace Illuminate\Support\Facades {
         {
             /** @var \Illuminate\Filesystem\Filesystem $instance */
             return $instance->get($path, $lock);
+        }
+
+        /**
+         * Get the contents of a file as decoded JSON.
+         *
+         * @param  string  $path
+         * @param  bool  $lock
+         * @return array
+         *
+         * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
+         *
+         * @static
+         */
+        public static function json($path, $lock = false)
+        {
+            /** @var \Illuminate\Filesystem\Filesystem $instance */
+            return $instance->json($path, $lock);
         }
 
         /**
@@ -9751,6 +9605,8 @@ namespace Illuminate\Support\Facades {
      * @method static \Psr\Log\LoggerInterface getLogger()
      * @method static \Illuminate\Contracts\Events\Dispatcher getEventDispatcher()
      * @method static void setEventDispatcher(\Illuminate\Contracts\Events\Dispatcher $dispatcher)
+     * @method static \Illuminate\Log\Logger|mixed when(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
+     * @method static \Illuminate\Log\Logger|mixed unless(\Closure|mixed|null $value = null, callable|null $callback = null, callable|null $default = null)
      *
      * @see \Illuminate\Log\LogManager
      */
@@ -12871,12 +12727,12 @@ namespace Illuminate\Support\Facades {
         /**
          * Clones a request and overrides some of its parameters.
          *
-         * @param  array  $query The GET parameters
-         * @param  array  $request The POST parameters
-         * @param  array  $attributes The request attributes (parameters parsed from the PATH_INFO, ...)
-         * @param  array  $cookies The COOKIE parameters
-         * @param  array  $files The FILES parameters
-         * @param  array  $server The SERVER parameters
+         * @param  array|null  $query The GET parameters
+         * @param  array|null  $request The POST parameters
+         * @param  array|null  $attributes The request attributes (parameters parsed from the PATH_INFO, ...)
+         * @param  array|null  $cookies The COOKIE parameters
+         * @param  array|null  $files The FILES parameters
+         * @param  array|null  $server The SERVER parameters
          * @return static
          *
          * @static
@@ -15421,7 +15277,7 @@ namespace Illuminate\Support\Facades {
         }
 
         /**
-         * Register a new Fallback route with the router.
+         * Register a new fallback route with the router.
          *
          * @param  array|string|callable|null  $action
          * @return \Illuminate\Routing\Route
@@ -21659,9 +21515,6 @@ namespace  {
     {
     }
     class Cookie extends \Illuminate\Support\Facades\Cookie
-    {
-    }
-    class Crypt extends \Illuminate\Support\Facades\Crypt
     {
     }
     class Date extends \Illuminate\Support\Facades\Date

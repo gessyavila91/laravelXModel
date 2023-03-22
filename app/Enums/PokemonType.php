@@ -6,39 +6,39 @@ use BenSampo\Enum\Enum;
 
 final class PokemonType extends Enum
 {
-    const NORMAL = 'NORMAL';
+    public const NORMAL = 'NORMAL';
 
-    const FIGHTING = 'FIGHTING';
+    public const FIGHTING = 'FIGHTING';
 
-    const FLYING = 'FLYING';
+    public const FLYING = 'FLYING';
 
-    const POISON = 'POISON';
+    public const POISON = 'POISON';
 
-    const GROUND = 'GROUND';
+    public const GROUND = 'GROUND';
 
-    const ROCK = 'ROCK';
+    public const ROCK = 'ROCK';
 
-    const BUG = 'BUG';
+    public const BUG = 'BUG';
 
-    const GHOST = 'GHOST';
+    public const GHOST = 'GHOST';
 
-    const STEEL = 'STEEL';
+    public const STEEL = 'STEEL';
 
-    const FIRE = 'FIRE';
+    public const FIRE = 'FIRE';
 
-    const WATER = 'WATER';
+    public const WATER = 'WATER';
 
-    const GRASS = 'GRASS';
+    public const GRASS = 'GRASS';
 
-    const ELECTRIC = 'ELECTRIC';
+    public const ELECTRIC = 'ELECTRIC';
 
-    const PSYCHIC = 'PSYCHIC';
+    public const PSYCHIC = 'PSYCHIC';
 
-    const ICE = 'ICE';
+    public const ICE = 'ICE';
 
-    const DRAGON = 'DRAGON';
+    public const DRAGON = 'DRAGON';
 
-    const DARK = 'DARK';
+    public const DARK = 'DARK';
 
-    const FAIRY = 'FAIRY';
+    public const FAIRY = 'FAIRY';
 }
