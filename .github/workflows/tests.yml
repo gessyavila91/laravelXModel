@@ -46,6 +46,9 @@ jobs:
       - name: Install Composer dependencies
         run : composer install --prefer-dist --no-interaction --no-progress
 
+      - name: Schema:Dump
+        run : php artisan schema:dump
+
       - name: Artisan Migrate
         run : php artisan migrate --force
 
