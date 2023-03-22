@@ -43,6 +43,9 @@ jobs:
           extensions : dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
           coverage   : none
 
+      - name: Copy environment file
+        run : cp .env.example .env
+
       - name: Install Composer dependencies
         run : composer install --prefer-dist --no-interaction --no-progress
 
@@ -52,8 +55,7 @@ jobs:
       - name: Artisan Migrate
         run : php artisan migrate --force
 
-      - name: Copy environment file
-        run : cp .env.example .env
+
 
       - name: Generate app key
         run : php artisan key:generate
