@@ -1,13 +1,19 @@
-name: tests
+name    : tests
 
-on  :
+on      :
   push        :
     branches:
       - PokemonAPP
       - '*.x'
   pull_request:
-
-jobs:
+services:
+  mysql:
+    image      : mysql:latest
+    ports      :
+      - "3306:3306"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+jobs    :
   test:
     runs-on : ubuntu-latest
 
