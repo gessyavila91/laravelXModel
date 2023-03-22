@@ -1,64 +1,55 @@
 name: tests
-
-on  :
+'on':
   push        :
     branches:
       - PokemonAPP
       - '*.x'
-  pull_request:
-
+  pull_request: null
 jobs:
   test:
     runs-on : ubuntu-latest
     services:
       mysql:
-        image  : mysql:latest
+        image  : 'mysql:latest'
         env    :
           MYSQL_ALLOW_EMPTY_PASSWORD: true
           MYSQL_DATABASE            : laravel
         ports  :
           - 3306/tcp
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
-
+        options: >-
+          --health-cmd="mysqladmin ping" --health-interval=10s
+          --health-timeout=5s --health-retries=3
       redis:
         image  : redis
         ports  :
           - 6379/tcp
-        options: --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=3
+        options: >-
+          --health-cmd="redis-cli ping" --health-interval=10s
+          --health-timeout=5s --health-retries=3
     strategy:
       fail-fast: true
       matrix   :
-        php: [ 8.2 ]
-
-    name    : PHP ${{ matrix.php }}
-
+        php:
+          - 8.2
+    name    : 'PHP ${{ matrix.php }}'
     steps   :
       - name: Checkout code
         uses: actions/checkout@v3
-
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
-          extensions : dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite
+          php-version: '${{ matrix.php }}'
+          extensions : 'dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite'
           coverage   : none
-
       - name: Copy environment file
         run : cp .env.example .env
-
       - name: Install Composer dependencies
         run : composer install --prefer-dist --no-interaction --no-progress
-
-      - name: Schema:Dump
-        run : php artisan schema:dump
-
+      - name: 'Schema:Dump'
+        run : 'php artisan schema:dump'
       - name: Artisan Migrate
         run : php artisan migrate --force
-
-
-
       - name: Generate app key
-        run : php artisan key:generate
-
+        run : 'php artisan key:generate'
       - name: Run Pest tests
         run : vendor/bin/pest
