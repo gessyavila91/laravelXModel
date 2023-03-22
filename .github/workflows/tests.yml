@@ -3,11 +3,9 @@ ame : tests
 on  :
   push        :
     branches:
-      - master
+      - PokemonAPP
       - '*.x'
   pull_request:
-  schedule    :
-    - cron: '0 0 * * *'
 
 jobs:
   tests     :
