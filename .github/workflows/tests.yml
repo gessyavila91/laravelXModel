@@ -3,11 +3,9 @@ name       : Tests
 on         :
   push        :
     branches:
-      - master
+      - PokemonAPP
       - '*.x'
   pull_request:
-  schedule    :
-    - cron: '0 0 * * *'
 
 permissions:
   contents: read
