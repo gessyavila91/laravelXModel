@@ -12,8 +12,8 @@ jobs:
       mysql:
         image  : 'mysql:latest'
         env    :
-          MYSQL_ALLOW_EMPTY_PASSWORD: true
-          MYSQL_DATABASE            : laravel
+          MYSQL_DATABASE: laravel
+          MYSQL_USER    : root
         ports  :
           - 3306/tcp
         options: >-
