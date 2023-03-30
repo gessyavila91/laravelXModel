@@ -58,4 +58,4 @@ jobs:
       - name: Generate app key
         run : 'php artisan key:generate'
       - name: Run Pest tests
-        run : vendor/bin/pest
+        run : ./vendor/bin/pest
