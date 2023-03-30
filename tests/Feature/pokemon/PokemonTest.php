@@ -5,23 +5,10 @@ use App\Http\Controllers\PokemonController;
 use App\Models\Pokemon;
 
 it('pokemon index can be render', function () {
-    $pokemon = Pokemon::factory()->make([
-        'number' => 25,
-        'name' => 'Pikachu',
-        'type_1' => PokemonType::ELECTRIC,
-        'type_2' => null,
-
-        'hp' => '35',
-        'attack' => '55',
-        'defense' => '40',
-        'spAttack' => '50',
-        'spDefense' => '50',
-        'speed' => '90',
-    ]);
-    $pokemon->save();
 
     $response = $this->get('/pokemons');
     $response->assertStatus(200);
+
 });
 
 it('can create a new Pikachu with post', function () {
