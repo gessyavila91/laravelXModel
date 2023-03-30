@@ -46,8 +46,13 @@ jobs:
         run : cp .env.example .env
       - name: Install Composer dependencies
         run : composer install --prefer-dist --no-interaction --no-progress
+
+      - name: 'docker-compose -f test.yml run --rm app php artisan migrate --env=testing'
+        run : docker-compose -f test.yml run --rm app php artisan migrate --env=testing
+
       - name: 'artisan migrate'
         run : 'php artisan migrate'
+
       - name: Artisan Migrate
         run : php artisan migrate --force
       - name: Generate app key
