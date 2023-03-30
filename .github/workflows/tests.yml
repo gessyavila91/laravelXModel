@@ -46,8 +46,8 @@ jobs:
         run : cp .env.example .env
       - name: Install Composer dependencies
         run : composer install --prefer-dist --no-interaction --no-progress
-      - name: 'Schema:Dump'
-        run : 'php artisan schema:dump'
+      - name: 'artisan migrate'
+        run : 'php artisan migrate'
       - name: Artisan Migrate
         run : php artisan migrate --force
       - name: Generate app key
