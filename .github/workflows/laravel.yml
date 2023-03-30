@@ -26,6 +26,8 @@ jobs:
       run: chmod -R 777 storage bootstrap/cache
     - name: npm
       run: npm install
+    - name: brazzers
+      run: php artisan breeze:install --dark
     - name: Create Database
       run: |
         mkdir -p database
