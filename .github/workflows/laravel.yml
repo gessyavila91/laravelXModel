@@ -27,7 +27,7 @@ jobs:
     - name: npm
       run: npm install
     - name: brazzers
-      run: php artisan breeze:install --dark
+      run: php artisan breeze:install vue --dark
     - name: Create Database
       run: |
         mkdir -p database
