@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "45ff2d491bfb54a94366d9fecf919aab",
+    "content-hash": "9f246fd6dd71053bd3d3bef1b894c94f",
     "packages": [
         {
             "name": "brick/math",
@@ -6757,16 +6757,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.20.2",
+            "version": "v1.21.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "5ae072b182b1efbec927409e8a3ce3b1078cc42c"
+                "reference": "3042ff8cf403817c340d5a7762b2d32900239f46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/5ae072b182b1efbec927409e8a3ce3b1078cc42c",
-                "reference": "5ae072b182b1efbec927409e8a3ce3b1078cc42c",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/3042ff8cf403817c340d5a7762b2d32900239f46",
+                "reference": "3042ff8cf403817c340d5a7762b2d32900239f46",
                 "shasum": ""
             },
             "require": {
@@ -6775,6 +6775,10 @@
                 "illuminate/support": "^8.0|^9.0|^10.0",
                 "php": "^7.3|^8.0",
                 "symfony/yaml": "^6.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0|^7.0|^8.0",
+                "phpstan/phpstan": "^1.10"
             },
             "bin": [
                 "bin/sail"
@@ -6814,7 +6818,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2023-02-08T20:22:21+00:00"
+            "time": "2023-03-13T01:22:10+00:00"
         },
         {
             "name": "marcocesarato/php-conventional-changelog",
