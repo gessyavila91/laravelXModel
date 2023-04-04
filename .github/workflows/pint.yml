@@ -1,11 +1,4 @@
 name: Pint
-on:
-  push:
-    branches:
-      ["main", "qa", "develop","feature/*"]
-  pull_request:
-    branches:
-      ["main", "qa", "develop"]
 
 jobs:
   phplint:

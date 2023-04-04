@@ -11,7 +11,7 @@ permissions:
 jobs:
   test:
     name: Laravel.yml
-    uses: laravel/.github/.github/workflows/laravel.yml
+    uses: .github/.github/workflows/laravel.yml
 
   merge:
     name: Merge
