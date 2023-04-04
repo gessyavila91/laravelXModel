@@ -1,5 +1,10 @@
 name: Pint
 
+on:
+  push:
+    branches:
+      ["main", "qa", "develop"]
+
 jobs:
   phplint:
     runs-on: ubuntu-latest
