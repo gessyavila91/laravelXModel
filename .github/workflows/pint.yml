@@ -1,4 +1,4 @@
-name: PHP Linting (Pint)
+name: Pint
 on:
   push:
     branches:
