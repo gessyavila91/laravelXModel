@@ -1,7 +1,8 @@
 name: pull requests
 
 on:
-  pull_request:
+  workflow_dispatch:
+  push:
     branches:
       [ "main", "qa", "develop" ]
 
