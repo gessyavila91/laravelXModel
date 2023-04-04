@@ -2,7 +2,7 @@ name: Pint
 on:
   push:
     branches:
-      ["main", "qa", "develop","features/*"]
+      ["main", "qa", "develop","feature/*"]
     pull_request:
       ["main", "qa", "develop"]
 
