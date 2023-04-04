@@ -1,12 +1,27 @@
 name: pull requests
 
 on:
-  pull_request_target:
-    types: [opened]
+  pull_request:
+    branches:
+      [ "main", "qa", "develop" ]
 
 permissions:
   pull-requests: write
 
 jobs:
-  uneditable:
-    uses: laravel/.github/.github/workflows/pull-requests.yml@main
+
+  merge:
+    name: Merge
+    needs: test
+    if: ${{ github.event.pull_request.merged == false && github.event.pull_request.mergeable == true && needs.test.outputs.test-result == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Merge
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git merge --no-ff ${{ github.head_ref }}
+          git push origin HEAD:${{ github.base_ref }}
