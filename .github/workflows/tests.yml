@@ -31,7 +31,6 @@ jobs:
         auto-start: true
         user: 'laravelXadmin'
         password: '123456'
-    - name: MysqlSetUPSelectVer
     - run: mysql -uroot -h127.0.0.1 -e 'SELECT version()'
     - name: MysqlSetUPCreateDB
     - run: mysql -uroot -h127.0.0.1 -e 'CREATE DATABASE laravelXDB;'
