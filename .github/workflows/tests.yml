@@ -68,8 +68,8 @@ jobs:
         DB_DATABASE  : laravel_db
         DB_USERNAME  : root
         DB_PASSWORD  : ''
-      run :
-        - sudo service mysql start
-        - ./vendor/bin/pest
+      run : sudo service mysql start
+    - name: pest
+      run : ./vendor/bin/pest
 
 
