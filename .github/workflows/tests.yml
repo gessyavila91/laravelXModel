@@ -36,7 +36,7 @@ jobs:
         # mysql root password :  # Required if "mysql user" is empty, default is empty. The root superuser password
         mysql user          : 'laravelXadmin' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
         mysql password      : 123456 # Required if "mysql user" exists. The password for the "mysql user"
-    - run: mysql -uroot -h127.0.0.1 -e 'SELECT version()'
+      run: mysql -uroot -h127.0.0.1 -e 'SELECT version()'
     - name: MysqlSetUPLaravelUser
     - run: mysql -ularavelXadmin -p123456 -h127.0.0.1 -e 'SELECT version()'
     - name: Checkout
