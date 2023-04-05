@@ -18,7 +18,7 @@ jobs:
         php: [ 8.2 ]
         os : [ ubuntu-latest ]
     runs-on: ${{ matrix.os }}
-    name: PHP ${{ matrix.php }} - ${{ matrix.os }}
+    name: Init-env - PHP ${{ matrix.php }} - ${{ matrix.os }}
 
     steps:
       - name: Checkout
@@ -37,11 +37,53 @@ jobs:
         run : php -r "file_exists('.env') || copy('.env.example', '.env');"
       - name: Generate key
         run : php artisan key:generate
-
-  laravel-pest:
+      - name: npm
+        run : npm ci
+      - name: brazzers
+        run : php artisan breeze:install blade --dark
+      - name: Compress composer folder
+        run: tar -czvf composer.tgz vendor/
+  npm:
     runs-on: ubuntu-latest
-    needs: [Init-env]
     steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: npm install
+        run: |
+          npm --version
+          npm ci
+      - name: 'Compress node_modules folder'
+        run: tar -czvf node_modules.tgz node_modules/
+
+      - name: Upload node_modules assets
+        uses: actions/upload-artifact@v2
+        with:
+          name: node_modules
+          path: node_modules.tgz
+          retention-days: 3
+  laravel-pest:
+    strategy:
+      fail-fast: true
+      matrix   :
+        php: [ 8.2 ]
+        os : [ ubuntu-latest ]
+    runs-on: ${{ matrix.os }}
+    name: Init-env - PHP ${{ matrix.php }} - ${{ matrix.os }}
+
+    needs: [Init-env,npm]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: ${{ matrix.php }}
+
       - name: Create Database
         run : |
           mkdir -p database
