@@ -121,6 +121,7 @@ jobs:
           DB_CONNECTION: sqlite
           DB_DATABASE  : database/database.sqlite
         run : ./vendor/bin/pest
+
   laravel-deploy:
     runs-on: ubuntu-latest
     needs: [laravel-pest]
