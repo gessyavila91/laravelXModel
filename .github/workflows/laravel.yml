@@ -11,12 +11,14 @@ permissions:
 
 jobs:
   Init env:
+
     strategy:
       fail-fast: true
       matrix   :
         php: [ 8.2 ]
-
-    runs-on: ubuntu-latest
+        os : [ ubuntu-latest ]
+    runs-on: ${{ matrix.os }}
+    name: PHP ${{ matrix.php }} - ${{ matrix.os }}
 
     steps:
       - uses: "shivammathur/setup-php@v2"
