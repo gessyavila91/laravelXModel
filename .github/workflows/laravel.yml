@@ -49,6 +49,12 @@ jobs:
           name: composer
           path: composer.tgz
           retention-days: 3
+      - name: Upload env
+        uses: actions/upload-artifact@v2
+        with:
+          name          : .env
+          path          : .env
+          retention-days: 3
   npm:
     runs-on: ubuntu-latest
     steps:
@@ -98,6 +104,10 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: composer
+      - name: Download env artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: .env
 
       - name: Unpack artifacts
         run: |
