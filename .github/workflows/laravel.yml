@@ -17,6 +17,7 @@ jobs:
       uses: styfle/cancel-workflow-action@v0.11.0
       with:
           access_token: ${{ github.token }}
+
     - name: laravel-pest
       run : echo "Run Pest..."
 #  laravel-build:
