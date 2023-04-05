@@ -58,6 +58,8 @@ jobs:
       run : npm install
     - name: brazzers
       run : php artisan breeze:install blade --dark
+    - name: migration
+      run : php artisan migrate
 
 #    - name: enable mysql
 #      env:
