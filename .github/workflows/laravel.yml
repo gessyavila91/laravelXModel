@@ -94,6 +94,10 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: node_modules
+      - name: Download composer artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: composer
 
       - name: Unpack artifacts
         run: |
