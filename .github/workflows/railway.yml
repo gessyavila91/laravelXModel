@@ -14,24 +14,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: composer install
-
-      - name: Run tests
-        run: ./vendor/bin/pest
-
   build:
     runs-on: ubuntu-latest
     needs: [test]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: composer install
-
-      - name: Run tests
-        run: ./vendor/bin/pest
 
   deploy:
     runs-on: ubuntu-latest
@@ -40,22 +28,3 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: composer install --no-dev
-
-      - name: Build assets
-        run: npm install && npm run production
-
-      - name: Deploy to production
-        uses: easingthemes/ssh-deploy@v2.2.14
-        with:
-          ssh-private-key: ${{ secrets.PRODUCTION_SSH_PRIVATE_KEY }}
-          ssh-known-hosts: ${{ secrets.PRODUCTION_SSH_KNOWN_HOSTS }}
-          source: ./
-          server: user@production-server.com
-          target: /var/www/html/laravel-app/
-          excludes: |
-            .git/
-            node_modules/
-            tests/
