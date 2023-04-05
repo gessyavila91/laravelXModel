@@ -21,9 +21,12 @@ jobs:
 #    steps:
 #      name: laravel-deploy
 #      run : echo "Deploying to production..."
-#  laravel-deploy:
-#    runs-on: ubuntu-latest
-#    needs: [laravel-pest, laravel-build]
-#    steps:
-#      name: laravel-deploy
-#      run: echo "Deploying to production..."
+  laravel-deploy:
+    runs-on: ubuntu-latest
+    needs: [laravel-pest, laravel-build]
+    steps:
+      - run: echo "Deploying to production..."
+
+      - name: laravel-deploy
+        if: ${{ github.event_name == 'push'}}
+        run: echo "Deploying to production..."
