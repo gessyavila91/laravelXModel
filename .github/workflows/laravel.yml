@@ -13,6 +13,7 @@ jobs:
   laravel-pest:
     runs-on: ubuntu-latest
     steps:
+
     - name: Cancel Previous Runs
       uses: styfle/cancel-workflow-action@v0.9.1
       with:
