@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  Init env:
+  Init-env:
 
     strategy:
       fail-fast: true
