@@ -23,7 +23,7 @@ jobs:
 #      run : echo "Deploying to production..."
   laravel-deploy:
     runs-on: ubuntu-latest
-    needs: [laravel-pest, laravel-build]
+    needs: [laravel-pest]
     steps:
       - run: echo "Deploying to production..."
 
