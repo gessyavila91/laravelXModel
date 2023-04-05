@@ -102,6 +102,7 @@ jobs:
       - name: Unpack artifacts
         run: |
           tar xvfz node_modules.tgz
+          tar xvfz composer.tgz
 
       - name: Create Database
         run : |
