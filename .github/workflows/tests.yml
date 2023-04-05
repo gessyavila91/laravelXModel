@@ -20,13 +20,18 @@ jobs:
       matrix:
         php: [8.2]
 
-    name: PHP ${{ matrix.php }}
+    name: PHP ${{ matrix.php }} - ${{ matrix.os }} - ${{ matrix.dependency-version }} - ${{ matrix.parallel }}
 
     steps:
-    - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+    - name: Checkout
+    - uses: actions/checkout@v3
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php }}
-    - uses: actions/checkout@v3
+        extensions : zip, fileinfo
+        tools      : composer:v2
+        coverage   : none
     - name: Copy .env
       run : php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
