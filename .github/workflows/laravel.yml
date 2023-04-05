@@ -43,6 +43,12 @@ jobs:
         run : php artisan breeze:install blade --dark
       - name: Compress composer folder
         run: tar -czvf composer.tgz vendor/
+      - name: Upload composer assets
+        uses: actions/upload-artifact@v2
+        with:
+          name: composer
+          path: composer.tgz
+          retention-days: 3
   npm:
     runs-on: ubuntu-latest
     steps:
@@ -70,12 +76,12 @@ jobs:
       matrix   :
         php: [ 8.2 ]
         os : [ ubuntu-latest ]
-    runs-on: ${{ matrix.os }}
-    name: Init-env - PHP ${{ matrix.php }} - ${{ matrix.os }}
+    runs-on : ${{ matrix.os }}
+    name    : laravel-pest - PHP ${{ matrix.php }} - ${{ matrix.os }}
 
     needs: [Init-env,npm]
 
-    steps:
+    steps   :
       - name: Checkout
         uses: actions/checkout@v3
         with:
@@ -83,6 +89,15 @@ jobs:
       - uses: "shivammathur/setup-php@v2"
         with:
           php-version: ${{ matrix.php }}
+
+      - name: Download npm artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: node_modules
+
+      - name: Unpack artifacts
+        run: |
+          tar xvfz node_modules.tgz
 
       - name: Create Database
         run : |
