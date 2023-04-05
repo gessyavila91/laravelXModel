@@ -13,6 +13,10 @@ jobs:
   laravel-pest:
     runs-on: ubuntu-latest
     steps:
+    - name: Cancel Previous Runs
+      uses: styfle/cancel-workflow-action@v0.11.0
+      with:
+          access_token: ${{ github.token }}
     - name: laravel-pest
       run : echo "Run Pest..."
 #  laravel-build:
