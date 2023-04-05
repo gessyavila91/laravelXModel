@@ -47,18 +47,7 @@ jobs:
       run : npm ci
     - name: brazzers
       run : php artisan breeze:install blade --dark
-#    - name: migration
-#      run : php artisan migrate
 
-#    - name: enable mysql
-#      env:
-#        DB_CONNECTION: mysql
-#        DB_HOST      : 127.0.0.1
-#        DB_PORT      : 3306
-#        DB_DATABASE  : laravel_db
-#        DB_USERNAME  : root
-#        DB_PASSWORD  : ''
-#      run : sudo service mysql start
     - name: Create Database
       run : |
         mkdir -p database
@@ -68,5 +57,10 @@ jobs:
         DB_CONNECTION: sqlite
         DB_DATABASE  : database/database.sqlite
       run : ./vendor/bin/pest
+    - name: Deploy
+      run: echo "Deploying..."
+    - name: Deploy to Heroku
+      if : ${{ github.event_name == 'push'}}
+      run: echo "Deploying to production..."
 
 
