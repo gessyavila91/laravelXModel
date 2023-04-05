@@ -1,13 +1,12 @@
 name: Tests
 
 on:
-  workflow_call:
-  #push:
-  #  branches:
-  #    ["main", "qa", "develop"]
-  #pull_request:
-  #schedule:
-  #  - cron: '0 7 * * 1-5'
+  push:
+    branches:
+      ["main", "qa", "develop"]
+  pull_request:
+  schedule:
+    - cron: '0 7 * * 1-5'
 
 permissions:
   contents: read
