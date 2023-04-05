@@ -3,6 +3,8 @@ name: Laravel
 on:
   push:
     branches: ["main", "qa", "develop","features/*"]
+  pull_request:
+    branches: ["main", "qa", "develop","features/*"]
 permissions:
   contents: read
 jobs:
