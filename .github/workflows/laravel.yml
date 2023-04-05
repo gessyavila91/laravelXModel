@@ -16,10 +16,15 @@ jobs:
     name: PHP ${{ matrix.php }}
 
     steps:
+      - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+        with:
+          php-version: ${{ matrix.php }}
+      - name: Copy .env
+        run : php -r "file_exists('.env') || copy('.env.example', '.env');"
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
   call-workflow:
     steps:
       - name: Run tests
-        uses: ./.github/workflows/test.yml@main
+        uses: ./.github/workflows/test.yml
 
