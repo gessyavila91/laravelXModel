@@ -31,12 +31,10 @@ jobs:
       - uses: "ramsey/composer-install@v2"
         with:
           composer-options: "--ignore-platform-reqs --optimize-autoloader"
-      - name: Init env
-        run : echo "Init env..."
       - name: Copy .env
-        run : php -r "file_exists('.env') || copy('.env.example', '.env');"
-      - name: Generate key
-        run : php artisan key:generate
+        run : |
+          php -r "file_exists('.env') || copy('.env.example', '.env');"
+          php artisan key:generate
       - name: brazzers
         run : php artisan breeze:install blade --dark
       - name: Compress composer folder
