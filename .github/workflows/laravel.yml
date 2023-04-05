@@ -37,8 +37,6 @@ jobs:
         run : php -r "file_exists('.env') || copy('.env.example', '.env');"
       - name: Generate key
         run : php artisan key:generate
-      - name: npm
-        run : npm ci
       - name: brazzers
         run : php artisan breeze:install blade --dark
       - name: Compress composer folder
