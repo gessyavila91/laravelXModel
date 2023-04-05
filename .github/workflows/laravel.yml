@@ -18,6 +18,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Run tests
-        uses: ./.github/workflows/test.yml
+  call-workflow:
+    - name: Run tests
+      uses: ./.github/workflows/test.yml@main
 
