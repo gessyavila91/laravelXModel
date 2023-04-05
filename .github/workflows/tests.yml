@@ -46,6 +46,8 @@ jobs:
         extensions : zip, fileinfo
         tools      : composer:v2
         coverage   : none
+    - name: select mysql
+      run : mysql -uroot -p123456 -e "use laravelXDB; select * from users;
     - name: Copy .env
       run : php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
