@@ -3,17 +3,17 @@ name: Laravel
 on:
   push:
     branches: ["main", "qa", "develop","features/*"]
+permissions:
+  contents: read
 jobs:
   laravel-tests:
     strategy:
       fail-fast: true
       matrix   :
         php: [ 8.2 ]
-
     name    : PHP ${{ matrix.php }}
-
     runs-on: ubuntu-latest
-    step:
+    steps:
       - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
         with:
           php-version: ${{ matrix.php }}
@@ -30,7 +30,6 @@ jobs:
         run : npm install
       - name: brazzers
         run : php artisan breeze:install blade --dark
-
       - name: Create Database
         run : |
           mkdir -p database
@@ -40,6 +39,3 @@ jobs:
           DB_CONNECTION: sqlite
           DB_DATABASE  : database/database.sqlite
         run : php artisan test
-
-
-
