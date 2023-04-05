@@ -11,17 +11,17 @@ jobs:
   laravel-pest:
     runs-on: ubuntu-latest
     steps:
-      name: laravel-deploy
+    - name: laravel-pest
       run : echo "Deploying to production..."
-  laravel-build:
-    runs-on: ubuntu-latest
-    needs: [laravel-pest]
-    steps:
-      name: laravel-deploy
-      run : echo "Deploying to production..."
-  laravel-deploy:
-    runs-on: ubuntu-latest
-    needs: [laravel-pest, laravel-build]
-    steps:
-      name: laravel-deploy
-      run: echo "Deploying to production..."
+#  laravel-build:
+#    runs-on: ubuntu-latest
+#    needs: [laravel-pest]
+#    steps:
+#      name: laravel-deploy
+#      run : echo "Deploying to production..."
+#  laravel-deploy:
+#    runs-on: ubuntu-latest
+#    needs: [laravel-pest, laravel-build]
+#    steps:
+#      name: laravel-deploy
+#      run: echo "Deploying to production..."
