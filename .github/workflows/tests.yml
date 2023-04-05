@@ -33,7 +33,7 @@ jobs:
         collation server    : 'utf8_general_ci' # Optional, default value is 'utf8mb4_general_ci'. The '--collation-server' option for mysqld
         mysql version       : '8.0' # Optional, default value is "latest". The version of the MySQL
         mysql database      : 'laravelXDB' # Optional, default value is "test". The specified database which will be create
-        mysql root password : '123456' # Required if "mysql user" is empty, default is empty. The root superuser password
+        #mysql root password : '123456' # Required if "mysql user" is empty, default is empty. The root superuser password
         mysql user          : 'laravelXadmin' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
         mysql password      : '123456' # Required if "mysql user" exists. The password for the "mysql user"
 
@@ -47,7 +47,7 @@ jobs:
         tools      : composer:v2
         coverage   : none
     - name: select mysql
-      run : mysql -uroot -p123456 -e "use laravelXDB; select * from users;
+      run : mysql -uroot -e "use laravelXDB; select * from users;
     - name: Copy .env
       run : php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
