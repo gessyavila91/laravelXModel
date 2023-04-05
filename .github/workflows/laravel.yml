@@ -108,11 +108,13 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: .env
-
       - name: Unpack artifacts
         run: |
           tar xvfz node_modules.tgz
           tar xvfz composer.tgz
+
+      - name: brazzers
+        run : php artisan breeze:install blade --dark
 
       - name: Create Database
         run : |
