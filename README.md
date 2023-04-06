@@ -67,5 +67,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Getse tasks
 
--[x] Integration ClickUp X Github
+:white_check_mark: Integration ClickUp X Github
 
