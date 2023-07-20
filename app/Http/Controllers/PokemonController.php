@@ -109,45 +109,45 @@ class PokemonController extends Controller
         ];
 
         $messages = [
-            'number.required' => 'El número del Pokémon es obligatorio',
-            'name.required' => 'El nombre del Pokémon es obligatorio',
-            'name.min' => 'El nombre del Pokémon debe tener al menos 3 caracteres',
-            'name.max' => 'El nombre del Pokémon no debe tener más de 255 caracteres',
+            'number.required' => __('validation.number.required'),
+            'name.required' => __('validation.name.required'),
+            'name.min' => __('validation.name.min'),
+            'name.max' => __('validation.name.max'),
 
-            'type_1.required' => 'El tipo de Pokémon es obligatorio',
-            'type_1.enum_value' => 'El tipo de Pokémon debe ser '.implode(',', PokemonType::getValues()),
+            'type_1.required' => __('validation.type_1.required'),
+            'type_1.enum_value' => __('validation.type_1.enum_value'),
 
-            'type_2.enum_value' => 'El tipo secundario de Pokémon debe ser '.implode(',', PokemonType::getValues()),
+            'type_2.enum_value' => __('validation.type_2.enum_value'),
 
-            'hp.required' => 'La vida del Pokémon es obligatoria',
-            'hp.integer' => 'La vida del Pokémon debe ser un número entero',
-            'hp.min' => 'La vida del Pokémon no debe ser menor a 0',
-            'hp.max' => 'La vida del Pokémon no debe ser mayor a 255',
+            'hp.required' => __('validation.stat.required', ['attribute' => 'hp']),
+            'hp.integer' => __('validation.stat.integer', ['attribute' => 'hp']),
+            'hp.min' => __('validation.stat.min', ['attribute' => 'hp', 'min' => 0]),
+            'hp.max' => __('validation.stat.max', ['attribute' => 'hp', 'max' => 255]),
 
-            'attack.required' => 'El ataque del Pokémon es obligatorio',
-            'attack.integer' => 'El ataque del Pokémon debe ser un número entero',
-            'attack.min' => 'El ataque del Pokémon no debe ser menor a 0',
-            'attack.max' => 'El ataque del Pokémon no debe ser mayor a 255',
+            'attack.required' => __('validation.stat.required', ['attribute' => 'attack']),
+            'attack.integer' => __('validation.stat.integer', ['attribute' => 'attack']),
+            'attack.min' => __('validation.stat.min', ['attribute' => 'attack', 'min' => 0]),
+            'attack.max' => __('validation.stat.max', ['attribute' => 'attack', 'max' => 255]),
 
-            'defense.required' => 'La defensa del Pokémon es obligatoria',
-            'defense.integer' => 'La defensa del Pokémon debe ser un número entero',
-            'defense.min' => 'La defensa del Pokémon no debe ser menor a 0',
-            'defense.max' => 'La defensa del Pokémon no debe ser mayor a 255',
+            'defense.required' => __('validation.stat.required', ['attribute' => 'defense']),
+            'defense.integer' => __('validation.stat.integer', ['attribute' => 'defense']),
+            'defense.min' => __('validation.stat.min', ['attribute' => 'defense', 'min' => 0]),
+            'defense.max' => __('validation.stat.max', ['attribute' => 'defense', 'max' => 255]),
 
-            'spAttack.required' => 'El ataque especial del Pokémon es obligatorio',
-            'spAttack.integer' => 'El ataque especial del Pokémon debe ser un número entero',
-            'spAttack.min' => 'El ataque especial del Pokémon no debe ser menor a 0',
-            'spAttack.max' => 'El ataque especial del Pokémon no debe ser mayor a 255',
+            'spAttack.required' => __('validation.stat.required', ['attribute' => 'spAttack']),
+            'spAttack.integer' => __('validation.stat.integer', ['attribute' => 'spAttack']),
+            'spAttack.min' => __('validation.stat.min', ['attribute' => 'spAttack', 'min' => 0]),
+            'spAttack.max' => __('validation.stat.max', ['attribute' => 'spAttack', 'max' => 255]),
 
-            'spDefense.required' => 'La defensa especial del Pokémon es obligatoria',
-            'spDefense.integer' => 'La defensa especial del Pokémon debe ser un número entero',
-            'spDefense.min' => 'La defensa especial del Pokémon no debe ser menor a 0',
-            'spDefense.max' => 'La defensa especial del Pokémon no debe ser mayor a 255',
+            'spDefense.required' => __('validation.stat.required', ['attribute' => 'spDefense']),
+            'spDefense.integer' => __('validation.stat.integer', ['attribute' => 'spDefense']),
+            'spDefense.min' => __('validation.stat.min', ['attribute' => 'spDefense', 'min' => 0]),
+            'spDefense.max' => __('validation.stat.max', ['attribute' => 'spDefense', 'max' => 255]),
 
-            'speed.required' => 'La velocidad del Pokémon es obligatoria',
-            'speed.integer' => 'La velocidad del Pokémon debe ser un número entero',
-            'speed.min' => 'La velocidad del Pokémon no debe ser menor a 0',
-            'speed.max' => 'La velocidad del Pokémon no debe ser mayor a 255',
+            'speed.required' => __('validation.stat.required', ['attribute' => 'speed']),
+            'speed.integer' => __('validation.stat.integer', ['attribute' => 'speed']),
+            'speed.min' => __('validation.stat.min', ['attribute' => 'speed', 'min' => 0]),
+            'speed.max' => __('validation.stat.max', ['attribute' => 'speed', 'max' => 255]),
         ];
 
         return Validator::make($request->all(), $rules, $messages);

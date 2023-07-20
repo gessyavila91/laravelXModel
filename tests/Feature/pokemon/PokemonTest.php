@@ -62,7 +62,7 @@ it('can`t create a new Pokemon with shortName', function () {
 
     $response->assertStatus(400)->assertJson([
         'name' => [
-            'El nombre del Pokémon debe tener al menos 3 caracteres',
+            __('validation.name.min'),
         ],
     ]);
 });
@@ -88,55 +88,47 @@ it('can`t create a new Pokemon with longName', function () {
     $response->assertStatus(400)
         ->assertJson([
             'name' => [
-                'El nombre del Pokémon no debe tener más de 255 caracteres',
+                __('validation.name.max'),
             ],
         ]);
 });
 
-it('can`t create a new Pokemon with everything wrong', function () {
+it('checks required, min, max and integer validations for pokemon stats', function () {
+    $pokemon = Pokemon::factory()->make();
     $response = $this->post('api/pokemon', [
-        'number' => -151,
-        'name' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-        'type_1' => null,
-        'type_2' => 'ANY',
-        'hp' => 256,
-        'attack' => -256,
-        'defense' => 256,
-        'spAttack' => -256,
-        'spDefense' => 256,
-        'speed' => -256,
+        'number' => $pokemon->number,
+        'name' => 'pikachu',
+        'type_1' => $pokemon->type_1,
+        'type_2' => $pokemon->type_2,
+        'hp' => -1, // Value less than min to test for 'min' validation
+        'attack' => 'string', // Non-integer value to test for 'integer' validation
+        'defense' => 256, // Value greater than max to test for 'max' validation
+        'spAttack' => null, // Value stats are null to test for 'required' validation
+        'spDefense' => null,
+        'speed' => null,
     ]);
-    //assert with response message
-    $response->assertStatus(400)
-        ->assertJson([
-            'name' => [
-                'El nombre del Pokémon no debe tener más de 255 caracteres',
-            ],
-            'type_1' => [
-                'El tipo de Pokémon es obligatorio',
-            ],
-            'type_2' => [
-                'El tipo secundario de Pokémon debe ser NORMAL,FIGHTING,FLYING,POISON,GROUND,ROCK,BUG,GHOST,STEEL,FIRE,WATER,GRASS,ELECTRIC,PSYCHIC,ICE,DRAGON,DARK,FAIRY',
-            ],
-            'hp' => [
-                'La vida del Pokémon no debe ser mayor a 255',
-            ],
-            'attack' => [
-                'El ataque del Pokémon no debe ser menor a 0',
-            ],
-            'defense' => [
-                'La defensa del Pokémon no debe ser mayor a 255',
-            ],
-            'spAttack' => [
-                'El ataque especial del Pokémon no debe ser menor a 0',
-            ],
-            'spDefense' => [
-                'La defensa especial del Pokémon no debe ser mayor a 255',
-            ],
-            'speed' => [
-                'La velocidad del Pokémon no debe ser menor a 0',
-            ],
-        ]);
+
+    $response->assertStatus(400)->assertJson([
+        'hp' => [
+            __('validation.stat.min', ['attribute' => 'hp', 'min' => 0]),
+        ],
+        'attack' => [
+            __('validation.stat.integer', ['attribute' => 'attack']),
+        ],
+        'defense' => [
+            __('validation.stat.max', ['attribute' => 'defense', 'max' => 255]),
+        ],
+        //If null values are not allowed
+        'spAttack' => [
+            __('validation.stat.required', ['attribute' => 'spAttack']),
+        ],
+        'spDefense' => [
+            __('validation.stat.required', ['attribute' => 'spDefense']),
+        ],
+        'speed' => [
+            __('validation.stat.required', ['attribute' => 'speed']),
+        ],
+    ]);
 });
 
 it('find Pikachu', function () {
